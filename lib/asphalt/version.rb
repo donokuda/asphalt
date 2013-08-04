@@ -1,0 +1,3 @@
+module Asphalt
+  VERSION = "0.0.1"
+end
