@@ -3,7 +3,7 @@ module Asphalt
     def self.init!(directory)
       directories = ["modules", "partials", "vendors"]
       directories.each do |scaffold_dir|
-        Dir.mkdir(File.join(directory, scaffold_dir)) unless Dir.exists?(File.join(directory, scaffold_dir))
+        FileUtils.mkdir_p(File.join(directory, scaffold_dir)) unless Dir.exists?(File.join(directory, scaffold_dir))
       end
 
       files = ['main.scss',

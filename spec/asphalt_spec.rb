@@ -7,6 +7,12 @@ describe Asphalt::Generator do
       puts "Temp directory: #{ @temp_directory }"
     end
 
+    it "creates the target directory if it doesn't exist" do
+      Asphalt::Generator.init!(File.join(@temp_directory, 'new_directory'))
+
+      Dir.should exist(File.join(@temp_directory, 'new_directory'))
+    end
+
     it "creates the correct set of directories and files" do
       Asphalt::Generator.init!(@temp_directory)
 
