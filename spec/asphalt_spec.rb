@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Asphalt do
+describe Asphalt::Generator do
   describe "#init!" do
     before(:all) do
       @temp_directory = Dir.mktmpdir
@@ -8,7 +8,7 @@ describe Asphalt do
     end
 
     it "creates the correct set of directories and files" do
-      Asphalt.init!(@temp_directory)
+      Asphalt::Generator.init!(@temp_directory)
 
       File.should exist(File.join(@temp_directory, 'main.scss'))
 
