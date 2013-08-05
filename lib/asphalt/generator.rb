@@ -1,5 +1,6 @@
 module Asphalt
   module Generator
+    # FIXME: TOMDOC this method and all other methods
     def self.init!(directory)
       directories = ["modules", "partials", "vendors"]
       directories.each do |scaffold_dir|
@@ -18,7 +19,14 @@ module Asphalt
                'partials/_reset.scss']
 
       files.each do |scaffold_file|
+        template_file_path = File.join(File.dirname(__FILE__), 'templates', scaffold_file)
         File.new(File.join(directory, scaffold_file), 'w+')
+
+        if File.exists?(template_file_path)
+          File.open(File.join(directory, scaffold_file), 'w+') do |f|
+            f.write(File.read(template_file_path))
+          end
+        end
       end
     end
   end
