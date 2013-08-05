@@ -39,9 +39,9 @@ describe Asphalt::Generator do
 
       Asphalt::Generator.init!(@temp_directory)
 
-      File.read(File.join(@temp_directory, 'main.scss')).should eq(File.read(File.join(fixtures_path, 'main.scss')))
-      File.read(File.join(@temp_directory, 'partials', '_base.sass')).should eq(File.read(File.join(fixtures_path, 'partials', '_base.sass')))
-      File.read(File.join(@temp_directory, 'modules', '_all.scss')).should eq(File.read(File.join(fixtures_path, 'modules', '_all.scss')))
+      File.read(File.join(@temp_directory, 'main.scss')).should match(%r(// ASPHALT GENERATED: MODULES))
+      File.read(File.join(@temp_directory, 'partials', '_base.sass')).should match(%r(@import "modules/all"))
+      File.read(File.join(@temp_directory, 'modules', '_all.scss')).should match(%r(// ASPHALT GENERATED: Modules))
 
     end
 
