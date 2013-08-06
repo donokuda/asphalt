@@ -20,12 +20,11 @@ module Asphalt
 
       files.each do |scaffold_file|
         template_file_path = File.join(File.dirname(__FILE__), 'templates', scaffold_file)
-        File.new(File.join(directory, scaffold_file), 'w+')
+        target_file =  File.new(File.join(directory, scaffold_file), 'a+')
 
         if File.exists?(template_file_path)
-          File.open(File.join(directory, scaffold_file), 'w+') do |f|
-            f.write(File.read(template_file_path))
-          end
+          target_file.write(File.read(template_file_path))
+          target_file.close
         end
       end
     end

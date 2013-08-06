@@ -45,6 +45,19 @@ describe Asphalt::Generator do
 
     end
 
+    it "should append template content to existing files" do
+      existing_file = File.new(File.join(@temp_directory, 'main.scss'), 'w+')
+      existing_file << "// Existing Content\n"
+      existing_file.close
+
+      Asphalt::Generator.init!(@temp_directory)
+
+      existing_file_content = File.read(File.join(@temp_directory, 'main.scss'))
+
+      existing_file_content.should match("// Existing Content")
+      existing_file_content.should match("// ASPHALT GENERATED: MODULES")
+    end
+
     after(:all) do
       FileUtils.remove_entry_secure @temp_directory
     end
