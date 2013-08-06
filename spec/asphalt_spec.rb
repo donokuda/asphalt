@@ -35,8 +35,6 @@ describe Asphalt::Generator do
     end
 
     it "should have content in the files generated" do
-      fixtures_path = File.expand_path(File.join(__FILE__, '..', 'fixtures', 'example_stylesheet_folder'))
-
       Asphalt::Generator.init!(@temp_directory)
 
       File.read(File.join(@temp_directory, 'main.scss')).should match(%r(// ASPHALT GENERATED: MODULES))
