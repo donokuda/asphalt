@@ -18,7 +18,7 @@ Install it from RubyGems:
 
 or clone and install from this repo
 
-    $ git clone https//github.com/donokuda/asphalt.git
+    $ git clone https://github.com/donokuda/asphalt.git
     $ cd asphalt
     $ rake install
 
