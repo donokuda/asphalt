@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Asphalt::VERSION
   spec.authors       = ["Don Okuda"]
   spec.email         = ["don.okuda@gmail.com"]
-  spec.description   = "Asphalt generates an opinionized directory structure for your Sass files"
-  spec.summary       = "Asphalt generates an opinionized directory structure for your Sass files"
-  spec.homepage      = ""
+  spec.description   = "Asphalt paves the way for your Sass stylesheets!"
+  spec.summary       = "Asphalt paves the way for your Sass stylesheets!"
+  spec.homepage      = "https://github.com/donokuda/asphalt"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
