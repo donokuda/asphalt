@@ -31,7 +31,7 @@ In the directory of your stylesheets:
 
 This will generate a folder structure of partialized Scss files.
 
-That's it! Run `sass -w /path/to/stylesheet_folder/main.scss` to compile your sass files!
+That's it! Run `sass -w main.scss` to compile your sass files!
 
 
 ## Contributing
