@@ -31,6 +31,10 @@ In the directory of your stylesheets:
 
 This will generate a folder structure of partialized Scss files.
 
+If you prefer the indented sass syntax, you can run
+
+    $ asphalt init --sass
+
 That's it! Run `sass -w main.scss` to compile your sass files!
 
 

@@ -1,7 +1,7 @@
 module Asphalt
   module Generator
     # FIXME: TOMDOC this method and all other methods
-    def self.init!(directory)
+    def self.init!(directory, options = {})
       directories = ["modules", "partials", "vendors"]
       directories.each do |scaffold_dir|
         FileUtils.mkdir_p(File.join(directory, scaffold_dir)) unless Dir.exists?(File.join(directory, scaffold_dir))
@@ -20,10 +20,26 @@ module Asphalt
 
       files.each do |scaffold_file|
         template_file_path = File.join(File.dirname(__FILE__), 'templates', scaffold_file)
-        target_file =  File.new(File.join(directory, scaffold_file), 'a+')
+
+        scaffold_directory = File.dirname(scaffold_file)
+        scaffold_filename  = File.basename(scaffold_file, File.extname(scaffold_file))
+
+        if scaffold_file == 'partials/_base.sass'
+          scaffold_ext = '.sass'
+        else
+          scaffold_ext = options[:format] == :sass ? ".sass" : ".scss"
+        end
+
+        scaffold_file_path = File.join(scaffold_directory, scaffold_filename + scaffold_ext)
+
+        target_file =  File.new(File.join(directory, scaffold_file_path), 'a+')
 
         if File.exists?(template_file_path)
-          target_file.write(File.read(template_file_path))
+          if options[:format] == :sass && File.extname(template_file_path) == '.scss'
+            target_file.write(`sass-convert #{ template_file_path } -F scss -T sass`)
+          else
+            target_file.write(File.read(template_file_path))
+          end
           target_file.close
         end
       end

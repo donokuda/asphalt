@@ -56,6 +56,31 @@ describe Asphalt::Generator do
       existing_file_content.should match("// ASPHALT GENERATED: MODULES")
     end
 
+    context "with the sass format option" do
+      it "creates sass files with the sass argument" do
+        sass_directory = Dir.mktmpdir
+
+        Asphalt::Generator.init!(sass_directory, :format => :sass)
+
+        File.should exist(File.join(sass_directory, 'main.sass'))
+        File.should exist(File.join(sass_directory, 'modules', '_all.sass'))
+        File.should exist(File.join(sass_directory, 'partials', '_base.sass'))
+        File.should exist(File.join(sass_directory, 'partials', '_buttons.sass'))
+
+        FileUtils.remove_entry_secure sass_directory
+      end
+
+      it "has files with the indented sass format" do
+        sass_directory = Dir.mktmpdir
+
+        Asphalt::Generator.init!(sass_directory, :format => :sass)
+        File.read(File.join(sass_directory, 'main.sass')).should match(%r(@import partials/base$))
+        File.read(File.join(sass_directory, 'partials', '_base.sass')).should match(%r(@import "modules/all"$))
+
+        FileUtils.remove_entry_secure sass_directory
+      end
+    end
+
     after(:all) do
       FileUtils.remove_entry_secure @temp_directory
     end
