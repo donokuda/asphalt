@@ -86,3 +86,13 @@ describe Asphalt::Generator do
     end
   end
 end
+
+describe Asphalt::Utils do
+  describe '.format_import_directive' do
+    it "returns import directives" do
+      result = Asphalt::Utils.format_import_directive("partials", "foo")
+
+      expect(result).to eq("@import 'partials/foo';")
+    end
+  end
+end
