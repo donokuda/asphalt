@@ -94,5 +94,11 @@ describe Asphalt::Utils do
 
       expect(result).to eq("@import 'partials/foo';")
     end
+
+    it "takes a sass format argument" do
+      result = Asphalt::Utils.format_import_directive("partials", "foo", :format => :sass)
+
+      expect(result).to eq("@import partials/foo")
+    end
   end
 end
