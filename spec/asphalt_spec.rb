@@ -37,9 +37,9 @@ describe Asphalt::Generator do
     it "should have content in the files generated" do
       Asphalt::Generator.init!(@temp_directory)
 
-      File.read(File.join(@temp_directory, 'main.scss')).should match(%r(// ASPHALT GENERATED: MODULES))
+      File.read(File.join(@temp_directory, 'main.scss')).should match(%r(@import "partials/base";))
       File.read(File.join(@temp_directory, 'partials', '_base.sass')).should match(%r(@import "modules/all"))
-      File.read(File.join(@temp_directory, 'modules', '_all.scss')).should match(%r(// ASPHALT GENERATED: Modules))
+      File.read(File.join(@temp_directory, 'modules', '_all.scss')).should match(%r(@import 'utility';))
 
     end
 
@@ -53,7 +53,7 @@ describe Asphalt::Generator do
       existing_file_content = File.read(File.join(@temp_directory, 'main.scss'))
 
       existing_file_content.should match("// Existing Content")
-      existing_file_content.should match("// ASPHALT GENERATED: MODULES")
+      existing_file_content.should match(%r(@import "partials/base";))
     end
 
     context "with the sass format option" do

@@ -1,7 +1,7 @@
-// ASPHALT GENERATED: MODULES
+// Base includes all of your mixins and variables
 @import "partials/base";
 
-// ASPHALT GENERATED: PARTIALS
+// Import partialized styles
 @import "partials/reset";
 @import "partials/typography";
 @import "partials/buttons";
@@ -14,4 +14,4 @@
 //   @import "vendor/colorpicker";
 //   @import "vendor/jquery.ui.core";
 
-// Your styles go here:
+// Put any extra styles here
