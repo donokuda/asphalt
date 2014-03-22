@@ -1,6 +1,5 @@
 module Asphalt
   module Generator
-    # FIXME: TOMDOC this method and all other methods
     def self.init!(directory, options = {})
       directories = ["modules", "partials", "vendors"]
       directories.each do |scaffold_dir|
@@ -44,5 +43,6 @@ module Asphalt
         end
       end
     end
+
   end
 end
