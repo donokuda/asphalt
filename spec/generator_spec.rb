@@ -86,6 +86,11 @@ end
 
 describe Asphalt::Generator, '.create_sass_file' do
   it 'creates a sass file with a directory' do
-    create_temp_directory
+    sass_directory = Dir.mktmpdir
+
+    Asphalt::Generator.create_sass_file('foo/bar', sass_directory)
+    File.should exist(File.join(sass_directory, 'foo', 'bar.scss'))
+
+    FileUtils.remove_entry_secure sass_directory
   end
 end
