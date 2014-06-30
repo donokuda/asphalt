@@ -4,7 +4,6 @@ require 'asphalt'
 
 def create_temp_directory
   @temp_directory ||= Dir.mktmpdir
-  puts "Temp directory: #{ @temp_directory }"
 end
 
 def remove_temp_directory
