@@ -30,3 +30,29 @@ describe Asphalt::Utils, '.last_import_statement' do
     expect(result).to eq("@import 'baz';")
   end
 end
+
+describe Asphalt::Utils, '.add_import_statement' do
+  it 'adds an import statement to a sass file' do
+    scss_stylesheet = <<-SCSS
+      @import 'foo/bar';
+      @import 'bar';
+
+      .some_style {
+        color: #FFF;
+      }
+    SCSS
+
+    expected = <<-SCSS
+      @import 'foo/bar';
+      @import 'bar';
+
+      .some_style {
+        color: #FFF;
+      }
+      @import 'baz';
+    SCSS
+
+    result = Asphalt::Utils.add_import_statement(scss_stylesheet, "@import 'baz';")
+    expect(result).to eq expected
+  end
+end
