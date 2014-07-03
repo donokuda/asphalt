@@ -16,5 +16,13 @@ module Asphalt
       regex = %r(^\s*(@import.+)$)
       sass_content.scan(regex).last.pop
     end
+
+    def self.update_file!(file_path, content)
+      previous_file_content = File.open(file_path, 'r').read
+
+      file = File.open(file_path, 'w+')
+      file << add_import_statement(previous_file_content, content)
+      file.close
+    end
   end
 end
