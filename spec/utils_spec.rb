@@ -25,6 +25,7 @@ describe Asphalt::Utils, '.last_import_statement' do
         color: #FFF;
       }
     SCSS
+    scss_stylesheet.gsub!(/^\s+/, "")
 
     result = Asphalt::Utils.last_import_statement(scss_stylesheet)
     expect(result).to eq("@import 'baz';")
@@ -41,6 +42,7 @@ describe Asphalt::Utils, '.add_import_statement' do
         color: #FFF;
       }
     SCSS
+    scss_stylesheet.gsub!(/^\s+/, "")
 
     expected = <<-SCSS
       @import 'foo/bar';
@@ -51,6 +53,7 @@ describe Asphalt::Utils, '.add_import_statement' do
       }
       @import 'baz';
     SCSS
+    expected.gsub!(/^\s+/, "")
 
     result = Asphalt::Utils.add_import_statement(scss_stylesheet, "@import 'baz';")
     expect(result).to eq expected
@@ -68,6 +71,7 @@ describe Asphalt::Utils, ".update_file" do
         color: #FFF;
       }
     SCSS
+    scss_content.gsub!(/^\s+/, "")
 
     expected = <<-SCSS
       @import 'foo/bar';
@@ -78,13 +82,14 @@ describe Asphalt::Utils, ".update_file" do
       }
       @import 'baz';
     SCSS
+    expected.gsub!(/^\s+/, "")
 
     sass_file_path = File.join(sass_directory, 'sass_file.scss')
     sass_file = File.new(sass_file_path, 'w+')
     sass_file << scss_content
     sass_file.close
 
-    Asphalt::Utils.update_file(sass_file_path, "@import 'baz';")
+    Asphalt::Utils.update_file!(sass_file_path, "@import 'baz';")
 
     new_sass_content = File.open(sass_file_path, 'r').read
 

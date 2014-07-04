@@ -1,7 +1,7 @@
 module Asphalt
   module Utils
     def self.add_import_statement(file_content, statement)
-      file_content + "\s\s\s\s\s\s#{statement}\n"
+      file_content + "#{statement}\n"
     end
 
     def self.format_import_directive(directory, file, options={})
