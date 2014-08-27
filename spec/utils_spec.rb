@@ -12,6 +12,14 @@ describe Asphalt::Utils, '.format_import_directive' do
 
     expect(result).to eq("@import partials/foo")
   end
+
+  context "with an empty directory array" do
+    it "doesn't have a leading slash" do
+      result = Asphalt::Utils.format_import_directive([], "foo")
+
+      expect(result).to eq("@import 'foo';")
+    end
+  end
 end
 
 describe Asphalt::Utils, '.last_import_statement' do

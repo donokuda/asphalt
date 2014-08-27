@@ -11,9 +11,9 @@ module Asphalt
 
     desc "generate directory_name sass_filename", "Generates a new sass file and adds an import statement to your main.scss"
     def generate(*directories, filename)
-      filename_path = File.join(directories)
-      import_statement = Asphalt::Utils.format_import_directive(filename_path, filename)
+      import_statement = Asphalt::Utils.format_import_directive(directories, filename)
 
+      filename_path = File.join(directories)
       Asphalt::Generator.create_sass_file(filename, filename_path)
       Asphalt::Utils.update_file!("main.scss", import_statement)
     end

@@ -4,11 +4,17 @@ module Asphalt
       file_content + "#{statement}\n"
     end
 
-    def self.format_import_directive(directory, file, options={})
-      if options[:format] == :sass
-        "@import #{directory}/#{file}"
+    def self.format_import_directive(directories, file, options={})
+      if directories.empty?
+        formatted_directories = nil
       else
-        "@import '#{directory}/#{file}';"
+        formatted_directories = "#{File.join(directories)}/"
+      end
+
+      if options[:format] == :sass
+        "@import #{formatted_directories}#{file}"
+      else
+        "@import '#{formatted_directories}#{file}';"
       end
     end
 
