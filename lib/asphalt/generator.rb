@@ -44,14 +44,19 @@ module Asphalt
       end
     end
 
-    def self.create_sass_file(filename, target_directory)
+    def self.create_sass_file(filename, target_directory, options={})
       filename_path = filename.split('/')
       sass_filename = filename_path.pop
       new_file_path = File.join(target_directory, filename_path)
+      if options[:format] == :sass
+        extension = "sass"
+      else
+        extension = "scss"
+      end
 
       FileUtils.mkdir_p File.join(new_file_path)
 
-      File.new(File.join(new_file_path, "#{sass_filename}.scss"), 'w')
+      File.new(File.join(new_file_path, "#{sass_filename}.#{extension}"), 'w')
     end
   end
 end

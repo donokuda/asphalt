@@ -93,4 +93,15 @@ describe Asphalt::Generator, '.create_sass_file' do
 
     FileUtils.remove_entry_secure sass_directory
   end
+
+  context "with a filetype argument set to sass" do
+    it "creates a file with the `.sass` extension" do
+      sass_directory = Dir.mktmpdir
+
+      Asphalt::Generator.create_sass_file('foobar', sass_directory, format: :sass)
+      File.should exist(File.join(sass_directory, 'foobar.sass'))
+
+      FileUtils.remove_entry_secure sass_directory
+    end
+  end
 end
