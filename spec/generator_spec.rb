@@ -98,8 +98,19 @@ describe Asphalt::Generator, '.create_sass_file' do
     it "creates a file with the `.sass` extension" do
       sass_directory = Dir.mktmpdir
 
-      Asphalt::Generator.create_sass_file('foobar', sass_directory, format: :sass)
+      Asphalt::Generator.create_sass_file('foobar', sass_directory, sass: true)
       File.should exist(File.join(sass_directory, 'foobar.sass'))
+
+      FileUtils.remove_entry_secure sass_directory
+    end
+  end
+
+  context "with the partial argument set to true" do
+    it "creates a file with an underscore in front of the filename" do
+      sass_directory = Dir.mktmpdir
+
+      Asphalt::Generator.create_sass_file('partial_file', sass_directory, partial: true)
+      File.should exist(File.join(sass_directory, '_partial_file.scss'))
 
       FileUtils.remove_entry_secure sass_directory
     end

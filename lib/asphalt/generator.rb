@@ -48,7 +48,12 @@ module Asphalt
       filename_path = filename.split('/')
       sass_filename = filename_path.pop
       new_file_path = File.join(target_directory, filename_path)
-      if options[:format] == :sass
+
+      if options[:partial] == true
+        sass_filename.insert(0, "_")
+      end
+
+      if options[:sass] == true
         extension = "sass"
       else
         extension = "scss"
