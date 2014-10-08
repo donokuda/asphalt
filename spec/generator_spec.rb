@@ -116,3 +116,15 @@ describe Asphalt::Generator, '.create_sass_file' do
     end
   end
 end
+
+describe Asphalt::Generator, '.create_config_file' do
+  it "creates a configuration file for asphalt" do
+    project_directory = Dir.mktmpdir
+
+    Asphalt::Generator.create_config_file(project_directory)
+
+    File.should exist(File.join(project_directory, '.asphalt.yml'))
+
+    FileUtils.remove_entry_secure project_directory
+  end
+end

@@ -63,5 +63,9 @@ module Asphalt
 
       File.new(File.join(new_file_path, "#{sass_filename}.#{extension}"), 'w')
     end
+
+    def self.create_config_file(target_directory)
+      File.new(File.join(target_directory, ".asphalt.yml"), "w")
+    end
   end
 end
