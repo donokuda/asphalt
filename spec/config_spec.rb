@@ -27,3 +27,18 @@ describe Asphalt::Config, ".get_main_stylesheet"  do
     expect(result).to eq "application.scss"
   end
 end
+
+describe Asphalt::Config, ".load_config_file"  do
+  it "returns the contents of a config file" do
+    project_directory = Dir.mktmpdir
+    path_to_config_file = File.join(project_directory, ".asphalt.yml")
+    config_file = File.open(path_to_config_file, "w") do |file|
+      file.write("hello")
+    end
+
+    result = Asphalt::Config.load_config_file(project_directory)
+    expect(result).to eq "hello"
+
+    FileUtils.remove_entry_secure project_directory
+  end
+end
