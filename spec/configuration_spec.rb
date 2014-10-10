@@ -1,43 +1,23 @@
 require "spec_helper"
 
-describe Asphalt::Configuration, ".get_stylesheets_directory"  do
-  before(:each) do
-    @config = <<-YAML
-      stylesheets_directory: app/assets/stylesheets
-    YAML
-    @config.gsub!(/^\s{6}/, "")
-  end
-
-  it "retrieves the setting for 'get_stylesheets_directory'" do
-    result = Asphalt::Configuration.get_stylesheets_directory(@config)
-    expect(result).to eq "app/assets/stylesheets"
-  end
-end
-
-describe Asphalt::Configuration, ".get_main_stylesheet"  do
-  before(:each) do
-    @config = <<-YAML
-      main_stylesheet: application.scss
-    YAML
-    @config.gsub!(/^\s{6}/, "")
-  end
-
-  it "retrieves the filename of the main stylesheet" do
-    result = Asphalt::Configuration.get_main_stylesheet(@config)
-    expect(result).to eq "application.scss"
-  end
-end
-
 describe Asphalt::Configuration, ".load_config_file"  do
-  it "returns the contents of a config file" do
+  it "sets the instance variables" do
     project_directory = Dir.mktmpdir
     path_to_config_file = File.join(project_directory, ".asphalt.yml")
-    config_file = File.open(path_to_config_file, "w") do |file|
-      file.write("hello")
-    end
+    config_content = <<-YAML
+      main_stylesheet: application.scss
+      stylesheets_directory: app/assets/stylesheets
+    YAML
+    config_content.gsub!(/^\s{6}/, "")
 
-    result = Asphalt::Configuration.load_config_file(project_directory)
-    expect(result).to eq "hello"
+    config_file = File.open(path_to_config_file, "w") do |file|
+      file.write(config_content)
+    end
+    configuration = Asphalt::Configuration.new
+    configuration.load_config_file(project_directory)
+
+    expect(configuration.stylesheets_directory).to eq "app/assets/stylesheets"
+    expect(configuration.main_stylesheet).to eq "application.scss"
 
     FileUtils.remove_entry_secure project_directory
   end
